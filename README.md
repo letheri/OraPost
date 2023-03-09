@@ -1,7 +1,7 @@
 # OraPost - Data Transfer from Oracle to Postgres 
 This python script can read from Oracle source and import table into Postgres target.
 
-## Reqirements
+## Requirements
 Libraries to run the script is provided in __requirements.txt__
 Accessing the Oracle databases further require a provider for the library to work.
 Provider files can be accessed at: 
