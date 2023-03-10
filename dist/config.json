@@ -1,0 +1,37 @@
+{
+  "author": "Erencan Taşbaş",
+  "date": "2023-03-07",
+  "version": 3.0,
+  "desc": "Oracle to Postgres data transfer",
+  "settings": {
+    "pg": {
+      "ip": "192.168.1.1",
+      "port": "5432",
+      "db": "database",
+      "user": "postgres",
+      "pass": "*************"
+    },
+    "ora": {
+      "TNS": "(DESCRIPTION =(ADDRESS_LIST =(ADDRESS =(PROTOCOL = TCP)(Host = 192.168.1.1)(Port =1521)))(CONNECT_DATA = (SERVICE_NAME = database)))",
+      "username": "PROD",
+      "password": "*************"
+    },
+    "tables": [
+      {
+        "source":{
+            "schema": "PROD",
+            "tablename": "SOURCE_TABLE_NAME"
+        },
+        "target":{
+            "schema": "public",
+            "tablename": "target_table_name"
+        }
+      }
+    ],
+    "sql": [
+      {
+        "path": "SQL\\afterInsert.sql"
+      }
+    ]
+  }
+}

@@ -43,22 +43,23 @@ def data_import(settings, table_parameters):
     logging.info(f"{tp['target']['tablename']} tabloya {df.shape[0]} adet veri aktarıldı.")
 
 
-def set_data(database_parameters):
-    try:
-        pg = Postgres(**database_parameters)
-        sql = open('afterInsert.sql', 'r').read()
-        pg.execMultiline(sql)
-    except FileNotFoundError:
-        logging.error(
-            'SQL dosyasını kontrol edin. Dosya adı "afterInsert.sql" olmalıdır '
-            've uygulama dosyası ile aynı konumda olmalıdır.')
-        raise
-    except Exception as ex:
-        logging.error(f'Hata:', exc_info=True)
-        raise
-    else:
-        logging.info('Aktarım sonrası SQL başarılı şekilde çalıştı.')
-        logging.info('Tamamlandı.. Bitiş: ' + date())
+def set_data(settings):
+    for i in settings['sql']:
+        try:
+            pg = Postgres(**settings['pg'])
+            sql = open(i['path'], 'r').read()
+            pg.execMultiline(sql)
+        except FileNotFoundError:
+            logging.error(
+                'SQL dosyasını kontrol edin. Dosya adı "afterInsert.sql" olmalıdır '
+                've uygulama dosyası ile aynı konumda olmalıdır.')
+            raise
+        except Exception as ex:
+            logging.error(f'Hata:', exc_info=True)
+            raise
+        else:
+            logging.info('Aktarım sonrası SQL başarılı şekilde çalıştı.')
+            logging.info('Tamamlandı.. Bitiş: ' + date())
 
 
 try:
@@ -84,4 +85,4 @@ except Exception as ex:
     raise
 else:
     logging.info('Veri aktarımı başarılı..')
-    set_data(config['settings']['pg'])
+    set_data(config['settings'])
