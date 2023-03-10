@@ -40,7 +40,7 @@ def data_import(settings, table_parameters):
     pgdb = settings['pg']
     engine = create_engine(f'postgresql://{pgdb["user"]}:{pgdb["pass"]}@{pgdb["ip"]}:{pgdb["port"]}/{pgdb["db"]}')
     df.to_sql(tp['target']["tablename"], engine, if_exists="replace")
-    logging.info(f'{tp["tablename"]} tabloya {df.shape[0]} adet veri aktarıldı.')
+    logging.info(f"{tp['target']['tablename']} tabloya {df.shape[0]} adet veri aktarıldı.")
 
 
 def set_data(database_parameters):
