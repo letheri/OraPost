@@ -1,3 +1,4 @@
+# -- coding: utf-8 --
 import datetime
 import json
 import logging
@@ -47,7 +48,7 @@ def set_data(settings):
     for i in settings['sql']:
         try:
             pg = Postgres(**settings['pg'])
-            sql = open(i['path'], 'r').read()
+            sql = open(i['path'], 'r', encoding="utf-8").read()
             pg.execMultiline(sql)
         except FileNotFoundError:
             logging.error(
