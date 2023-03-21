@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 
 from libs.postgres import Postgres
 from libs.oracle import Oracle
-Oracle.select()
+
 
 def date():
     return str(datetime.datetime.today()).split('.')[0].replace(' ', '__').replace(':', '-')
